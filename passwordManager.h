@@ -2,7 +2,7 @@
 #define PASSWORDMANAGER_H
 
 
-#include <QtWidgets/QMainWindow>
+#include <QMainWindow>
 #include "ui_passwordManager.h"
 
 class PasswordManager : public QMainWindow

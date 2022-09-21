@@ -29,28 +29,25 @@ void Login::changeWindow()
 void Login::confirmPress() {
     std::string username = ui.lineEdit_user->text().toStdString();
     std::string password = ui.lineEdit_pass->text().toStdString();
-
     try {
         System::String^ connectionString = "Data Source=DESKTOP-GN4TKUU;Initial Catalog=passwordManager;Integrated Security=True";
         SqlConnection sqlConnection(connectionString);
         sqlConnection.Open();
 
-        System::String^ sqlQuery = "SELECT * FROM users WHERE email=@email AND password=@pwd;";
+        System::String^ sqlQuery = "SELECT * FROM users WHERE username=@username AND password=@password;";
         SqlCommand command(sqlQuery, %sqlConnection);
-        command.Parameters->AddWithValue("@email", username);
-        command.Parameters->AddWithValue("@pwd", password);
+        command.Parameters->AddWithValue("@username", msclr::interop::marshal_as<System::String^>(username));
+        command.Parameters->AddWithValue("@password", msclr::interop::marshal_as<System::String^>(password));
 
         SqlDataReader^ reader = command.ExecuteReader();
         if (reader->Read()) {
-            user = gcnew User;
+            User^ user = gcnew User;
             user->id = reader->GetInt32(0);
-            user->name = reader->GetString(1);
-            user->email = reader->GetString(2);
-            user->phone = reader->GetString(3);
-            user->address = reader->GetString(4);
-            user->password = reader->GetString(5);
+            user->username = reader->GetString(1);
+            user->password = reader->GetString(2);
 
-            this->Close();
+            this->hide();
+            second->show();
         }
         else {
             QMessageBox::information(this, "Message", "Email or password is incorrect", QMessageBox::Ok);
@@ -59,7 +56,4 @@ void Login::confirmPress() {
     catch (std::exception e) {
         QMessageBox::information(this, "Message", "Server connection error", QMessageBox::Ok);
     }
-
-    this->hide();
-    second->show();
 }
