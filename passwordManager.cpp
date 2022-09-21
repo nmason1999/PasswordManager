@@ -1,10 +1,10 @@
 #include "passwordManager.h"
 
-passwordManager::passwordManager(QWidget *parent)
+PasswordManager::PasswordManager(QWidget *parent)
     : QMainWindow(parent)
 {
     ui.setupUi(this);
 }
 
-passwordManager::~passwordManager()
+PasswordManager::~PasswordManager()
 {}

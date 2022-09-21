@@ -1,16 +1,20 @@
-#pragma once
+#ifndef PASSWORDMANAGER_H
+#define PASSWORDMANAGER_H
+
 
 #include <QtWidgets/QMainWindow>
 #include "ui_passwordManager.h"
 
-class passwordManager : public QMainWindow
+class PasswordManager : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    passwordManager(QWidget *parent = nullptr);
-    ~passwordManager();
+    PasswordManager(QWidget *parent = nullptr);
+    ~PasswordManager();
 
 private:
     Ui::passwordManagerClass ui;
 };
+
+#endif // PASSWORDMANAGER_H
