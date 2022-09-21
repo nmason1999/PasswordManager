@@ -3,8 +3,8 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    passwordManager w;
-    w.show();
-    return a.exec();
+    QApplication app(argc, argv);
+    passwordManager window;
+    window.show();
+    return app.exec();
 }
