@@ -30,7 +30,7 @@ void Login::confirmPress() {
     std::string username = ui.lineEdit_user->text().toStdString();
     std::string password = ui.lineEdit_pass->text().toStdString();
     try {
-        System::String^ connectionString = "Data Source=DESKTOP-GN4TKUU;Initial Catalog=passwordManager;Integrated Security=True";
+        System::String^ connectionString = "Data Source=DESKTOP-GN4TKUU;Initial Catalog=passwordManager;Integrated Security=True"; // change for your machine
         SqlConnection sqlConnection(connectionString);
         sqlConnection.Open();
 
