@@ -2,7 +2,7 @@
 #define PASSWORDMANAGER_H
 
 
-#include <QMainWindow>
+//#include <QMainWindow>
 #include "ui_passwordManager.h"
 
 class PasswordManager : public QMainWindow
@@ -10,7 +10,7 @@ class PasswordManager : public QMainWindow
     Q_OBJECT
 
 public:
-    PasswordManager(QWidget *parent = nullptr);
+    explicit PasswordManager(QWidget *parent = nullptr);
     ~PasswordManager();
 
 private:

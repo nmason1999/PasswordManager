@@ -1,8 +1,7 @@
 #ifndef LOGIN_H
 #define LOGIN_H
 
-#include <QMainWindow>
-#include <QTimer>
+//#include <QMainWindow>
 #include "passwordManager.h"
 #include "ui_login.h"
 
@@ -26,17 +25,19 @@ class Login : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit Login(QWidget* parent = 0);
+    explicit Login(QWidget* parent = nullptr);
     ~Login();
+
+signals:
+    void changeToNewUser();
+    void changeToPasswordManager();
 
 private slots:
     void confirmPress();
-    void changeWindow();
+    void newUserPress();
 
 private:
     Ui::loginClass ui;
-    PasswordManager* second;
-    QTimer* timer;
 };
 
 #endif // LOGIN_H

@@ -8,3 +8,4 @@ PasswordManager::PasswordManager(QWidget *parent)
 
 PasswordManager::~PasswordManager()
 {}
+

@@ -8,27 +8,17 @@ Login::Login(QWidget* parent) :
     QMainWindow(parent)
 {
     ui.setupUi(this);
-    second = new PasswordManager();
-    timer = new QTimer();
-    connect(ui.pushButton, SIGNAL(clicked()), this, SLOT(confirmPress()));
-    connect(timer, &QTimer::timeout, this, &Login::changeWindow);
-    timer->start(1000); // 1000 ms
+    connect(ui.confirmButton, SIGNAL(clicked()), this, SLOT(confirmPress()));
+    connect(ui.newUserButton, SIGNAL(clicked()), this, SLOT(newUserPress()));
 }
 
 Login::~Login()
 {}
 
-void Login::changeWindow()
-{
-    if (second->isVisible()) {
-        second->hide();
-        this->show();
-    }
-}
 
 void Login::confirmPress() {
-    std::string username = ui.lineEdit_user->text().toStdString();
-    std::string password = ui.lineEdit_pass->text().toStdString();
+    std::string username = ui.usernameLineEdit->text().toStdString();
+    std::string password = ui.passwordLineEdit->text().toStdString();
     try {
         System::String^ connectionString = "Data Source=DESKTOP-GN4TKUU;Initial Catalog=passwordManager;Integrated Security=True"; // change for your machine
         SqlConnection sqlConnection(connectionString);
@@ -47,7 +37,7 @@ void Login::confirmPress() {
             user->password = reader->GetString(2);
 
             this->hide();
-            second->show();
+            emit changeToPasswordManager();
         }
         else {
             QMessageBox::information(this, "Message", "Email or password is incorrect", QMessageBox::Ok);
@@ -56,4 +46,8 @@ void Login::confirmPress() {
     catch (std::exception e) {
         QMessageBox::information(this, "Message", "Server connection error", QMessageBox::Ok);
     }
+}
+
+void Login::newUserPress() {
+    emit changeToNewUser();
 }

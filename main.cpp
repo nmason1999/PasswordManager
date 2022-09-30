@@ -1,11 +1,9 @@
-#include "passwordManager.h"
-#include "login.h"
+#include "WindowHandler.h"
 #include <QtWidgets/QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    Login window;
-    window.show();
+    WindowHandler window;
     return app.exec();
 }
