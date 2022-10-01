@@ -3,6 +3,10 @@
 
 #include "ui_newUser.h"
 
+using System::Data::SqlClient::SqlConnection;
+using System::Data::SqlClient::SqlCommand;
+using System::Data::SqlClient::SqlDataReader;
+
 namespace Ui {
 	class NewUser;
 }
@@ -14,6 +18,13 @@ class NewUser : public QMainWindow
 public:
 	explicit NewUser(QWidget* parent = 0);
 	~NewUser();
+
+signals:
+	void changeToPasswordManager();
+
+private slots:
+	void confirmPress();
+
 private:
 	Ui::newUserClass ui;
 };
