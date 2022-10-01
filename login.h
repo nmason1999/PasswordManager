@@ -1,7 +1,6 @@
 #ifndef LOGIN_H
 #define LOGIN_H
 
-//#include <QMainWindow>
 #include "passwordManager.h"
 #include "ui_login.h"
 

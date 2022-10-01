@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>newUserClass</class>
- <widget class="QMainWindow" name="newUserClass">
+ <class>addItemClass</class>
+ <widget class="QMainWindow" name="addItemClass">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>newUser</string>
+   <string>addItem</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="verticalLayoutWidget">
@@ -28,13 +28,36 @@
       <widget class="QLabel" name="titleLabel">
        <property name="font">
         <font>
-         <pointsize>36</pointsize>
+         <pointsize>22</pointsize>
         </font>
        </property>
        <property name="text">
-        <string>New User</string>
+        <string>Add Item</string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::AutoText</enum>
        </property>
       </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="urlLayout">
+       <property name="spacing">
+        <number>6</number>
+       </property>
+       <property name="sizeConstraint">
+        <enum>QLayout::SetFixedSize</enum>
+       </property>
+       <item alignment="Qt::AlignVCenter">
+        <widget class="QLabel" name="urlLabel">
+         <property name="text">
+          <string>URL</string>
+         </property>
+        </widget>
+       </item>
+       <item alignment="Qt::AlignVCenter">
+        <widget class="QLineEdit" name="urlLineEdit"/>
+       </item>
+      </layout>
      </item>
      <item>
       <layout class="QHBoxLayout" name="usernameLayout">
