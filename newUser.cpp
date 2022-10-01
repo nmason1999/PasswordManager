@@ -30,17 +30,16 @@ void NewUser::confirmPress() {
             FROM master.sys.server_principals
             WHERE name = @username
         );
-        SqlCommand checkUserCommand(sqlQuery, % sqlConnection);
-        checkUserCommand.Parameters->AddWithValue("@username", msclr::interop::marshal_as<System::String^>(username));
+        SqlCommand command(sqlQuery, % sqlConnection);
+        command.Parameters->AddWithValue("@username", msclr::interop::marshal_as<System::String^>(username));
         /*System::String^ sqlQuery = "GRANT CONNECT TO username=@username IDENTIFIED BY password=@password;";
         SqlCommand command(sqlQuery, % sqlConnection);
         command.Parameters->AddWithValue("@username", msclr::interop::marshal_as<System::String^>(username));
         command.Parameters->AddWithValue("@password", msclr::interop::marshal_as<System::String^>(password));
         */
-        SqlDataReader^ checkUserReader = checkUserCommand.ExecuteReader();
-        if (!checkUserReader->Read()) {
-            //checkUserCommand.Dispose();
-            checkUserReader->Close();
+        SqlDataReader^ reader = command.ExecuteReader();
+        if (!reader->Read()) {
+            reader->Close();
             /*
             * for some reason AddWithValue isnt replacing the parameters so starting with string then will convert to String^
              std::string sqlQueryString = SQL(
@@ -76,13 +75,12 @@ void NewUser::confirmPress() {
             sqlQuery = msclr::interop::marshal_as<System::String^>(sqlQueryString);
             // GRANT SELECT ON[schemaName].[tableName] to[username]
             //https://stackoverflow.com/questions/9787047/sql-server-can-you-limit-access-to-only-one-table#:~:text=Using%20the%20UI%20you%20can,%22%20button%20under%20Securables%20tab).
-            SqlCommand newUserCommand(sqlQuery, % sqlConnection);
+            SqlCommand command(sqlQuery, % sqlConnection);
 
-            SqlDataReader^ newUserReader = newUserCommand.ExecuteReader();
-            emit changeToPasswordManager();
+            reader = command.ExecuteReader();
+            emit changeToPasswordManager(username);
         }
         else {
-            checkUserReader->Close();
             QMessageBox::information(this, "Message", "username already exists", QMessageBox::Ok);
         }
     }

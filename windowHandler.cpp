@@ -10,8 +10,8 @@ WindowHandler::WindowHandler(QWidget* parent)
     loginWindow->show();
 
     connect(loginWindow, SIGNAL(changeToNewUser()), this, SLOT(openNewUser()));
-    connect(loginWindow, SIGNAL(changeToPasswordManager()), this, SLOT(openPasswordManager()));
-    connect(newUserWindow, SIGNAL(changeToPasswordManager()), this, SLOT(openPasswordManager()));
+    connect(loginWindow, SIGNAL(changeToPasswordManager(std::string)), this, SLOT(openPasswordManager(std::string)));
+    connect(newUserWindow, SIGNAL(changeToPasswordManager(std::string)), this, SLOT(openPasswordManager(std::string)));
 }
 
 WindowHandler::~WindowHandler()
@@ -41,7 +41,7 @@ void WindowHandler::openNewUser() {
         newUserWindow->show();
 }
 
-void WindowHandler::openPasswordManager() {
+void WindowHandler::openPasswordManager(std::string user) {
     if (newUserWindow->isVisible()) {
         newUserWindow->close();
     }
@@ -50,6 +50,7 @@ void WindowHandler::openPasswordManager() {
         loginWindow->close();
     }
 
+    passwordManagerWindow->getUser(user);
     passwordManagerWindow->show();
 }
 

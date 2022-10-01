@@ -38,13 +38,9 @@ void Login::confirmPress() {
 
         SqlDataReader^ reader = command.ExecuteReader();
         if (reader->Read()) {
-            User^ user = gcnew User;
-            //user->id = reader->GetInt32(0);
-            //user->username = reader->GetString(1);
-            //user->password = reader->GetString(2);
 
             this->hide();
-            emit changeToPasswordManager();
+            emit changeToPasswordManager(username);
         }
         else {
             QMessageBox::information(this, "Message", "Email or password is incorrect", QMessageBox::Ok);

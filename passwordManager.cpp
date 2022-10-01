@@ -1,3 +1,4 @@
+#include <QMessageBox>
 #include "passwordManager.h"
 
 PasswordManager::PasswordManager(QWidget *parent)
@@ -12,10 +13,25 @@ PasswordManager::PasswordManager(QWidget *parent)
 PasswordManager::~PasswordManager()
 {}
 
+void PasswordManager::getUser(std::string user) {
+    this->user = user;
+}
+
 
 void PasswordManager::addPress() {
-    addItemWindow = new AddItem();
+    addItemWindow = new AddItem(user);
     addItemWindow->show();
+    // having issues preventing multiple windows
+    // singleton?
+    /*
+    if (addItemWindow == nullptr) {
+        addItemWindow = new AddItem(user);
+        addItemWindow->show();
+    }
+    else if (addItemWindow->isVisible()) {
+        QMessageBox::information(this, "Message", "window is currently open", QMessageBox::Ok);
+    }
+    */
 }
 
 void PasswordManager::deletePress() {

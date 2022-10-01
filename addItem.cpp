@@ -6,9 +6,10 @@
 
 #define SQL(...) #__VA_ARGS__
 
-AddItem::AddItem(QWidget* parent) :
+AddItem::AddItem(std::string user ,QWidget* parent) :
     QMainWindow(parent)
 {
+    this->user = user;
     ui.setupUi(this);
     connect(ui.confirmButton, SIGNAL(clicked()), this, SLOT(confirmPress()));
 }
@@ -30,21 +31,22 @@ void AddItem::confirmPress() {
         /*
         System::String^ sqlQuery = SQL(
             USE [passwordManager]
-SETUSER 'luke';
-GO
-INSERT INTO passwordManager.dbo.luke (url, username, password)
-VALUES( 'url', 'luks', 'password');
-SETUSER;
+            SETUSER '@user';
+            GO
+            INSERT INTO passwordManager.dbo.@user (url, username, password)
+            VALUES( '@url', '@username', '@password');
+            SETUSER;
         );
         command.Parameters->AddWithValue("@url", msclr::interop::marshal_as<System::String^>(url));
+        command.Parameters->AddWithValue("@user", msclr::interop::marshal_as<System::String^>(user));
         command.Parameters->AddWithValue("@username", msclr::interop::marshal_as<System::String^>(username));
         command.Parameters->AddWithValue("@password", msclr::interop::marshal_as<System::String^>(password));
         */
 
         std::string sqlQueryString =
             "USE[passwordManager]"
-            "SETUSER '" + username + "';" //!!!!!!!!!!!!!!! need to change so using username from login
-            "INSERT INTO passwordManager.dbo." + username + "(url, username, password)" //!!!!!!!!!!!!!!! need to change so using username from login
+            "SETUSER '" + user + "';"
+            "INSERT INTO passwordManager.dbo." + user + "(url, username, password)"
             "VALUES('" + url + "', '" + username + "', '" + password + "');";
         System::String^ sqlQuery = msclr::interop::marshal_as<System::String^>(sqlQueryString);
         SqlCommand command(sqlQuery, %sqlConnection);

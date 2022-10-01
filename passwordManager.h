@@ -11,6 +11,7 @@ class PasswordManager : public QMainWindow
 public:
     explicit PasswordManager(QWidget *parent = nullptr);
     ~PasswordManager();
+    void getUser(std::string user);
 
 private slots:
     void addPress();
@@ -19,6 +20,7 @@ private slots:
 
 private:
     Ui::passwordManagerClass ui;
+    std::string user;
     AddItem* addItemWindow;
 };
 

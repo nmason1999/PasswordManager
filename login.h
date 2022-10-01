@@ -29,7 +29,7 @@ public:
 
 signals:
     void changeToNewUser();
-    void changeToPasswordManager();
+    void changeToPasswordManager(std::string user);
 
 private slots:
     void confirmPress();

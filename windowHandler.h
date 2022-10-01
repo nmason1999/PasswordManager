@@ -16,7 +16,7 @@ public:
 private slots:
 	void openLogin();
 	void openNewUser();
-	void openPasswordManager();
+	void openPasswordManager(std::string user);
 
 private:
 	Login* loginWindow;

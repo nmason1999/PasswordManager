@@ -16,7 +16,7 @@ class AddItem : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit AddItem(QWidget* parent = nullptr);
+    explicit AddItem(std::string user, QWidget* parent = nullptr);
     ~AddItem();
 
 signals:
@@ -27,6 +27,7 @@ private slots:
 
 private:
     Ui::addItemClass ui;
+    std::string user;
 };
 
 #endif // ADDITEM_H
